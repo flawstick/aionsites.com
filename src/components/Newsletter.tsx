@@ -52,7 +52,7 @@ export const Newsletter = () => {
         <div className="space-y-2 text-center">
           <h1 className="text-3xl font-bold">Get in Touch</h1>
           <p className="text-gray-500 dark:text-gray-400">
-            Fill out the form below and we'll get back to you as soon as
+            Fill out the form below and we&aposll get back to you as soon as
             possible.
           </p>
         </div>
