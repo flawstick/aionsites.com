@@ -2,7 +2,6 @@ import { Button } from "./ui/button";
 import { buttonVariants } from "./ui/button";
 import { MacWindowCard } from "./MacWindowCard";
 import { ArrowLongRightIcon } from "./Icons";
-import ScrollDownArrow from "./ScrollDownArrow";
 
 export const Hero = () => {
   return (
