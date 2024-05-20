@@ -74,9 +74,9 @@ export const Navbar = () => {
               </SheetTrigger>
 
               <SheetContent side={"left"}>
-                <SheetHeader>
+                <SheetHeader className="flex items-center justify-center">
                   <SheetTitle className="font-bold text-xl">
-                    Shadcn/React
+                    <LogoIcon size={120} />
                   </SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col justify-center items-center gap-2 mt-4">
@@ -93,14 +93,16 @@ export const Navbar = () => {
                   ))}
                   <a
                     rel="noreferrer noopener"
-                    href="https://github.com/leoMirandaa/shadcn-landing-page.git"
+                    href="https://app.aionsites.com/"
                     target="_blank"
-                    className={`w-[110px] border ${buttonVariants({
-                      variant: "secondary",
+                    className={`group w-[150px] ${buttonVariants({
+                      variant: "default",
                     })}`}
                   >
-                    <GitHubLogoIcon className="mr-2 w-5 h-5" />
-                    Github
+                    <div className="text-md translate-x-4 group-hover:translate-x-0 transition-all duration-300 transform">
+                      Launch App
+                    </div>
+                    <ArrowLongRightIcon className="ml-2 w-6 h-6 mt-[2px] transform transition-all duration-300 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0" />
                   </a>
                 </nav>
               </SheetContent>
@@ -124,19 +126,17 @@ export const Navbar = () => {
           </nav>
 
           <div className="hidden md:flex gap-2">
-            <div className="group flex items-center">
-              <a
-                rel="noreferrer noopener"
-                href="https://app.aionsites.com/"
-                target="_blank"
-                className={`${buttonVariants({ variant: "default" })}`}
-              >
-                <div className="text-md translate-x-4 group-hover:translate-x-0 transition-all duration-300 transform">
-                  Launch App
-                </div>
-                <ArrowLongRightIcon className="ml-2 w-6 h-6 mt-[2px] transform transition-all duration-300 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0" />
-              </a>
-            </div>
+            <a
+              rel="noreferrer noopener"
+              href="https://app.aionsites.com/"
+              target="_blank"
+              className={`group ${buttonVariants({ variant: "default" })}`}
+            >
+              <div className="text-md translate-x-4 group-hover:translate-x-0 transition-all duration-300 transform">
+                Launch App
+              </div>
+              <ArrowLongRightIcon className="ml-2 w-6 h-6 mt-[2px] transform transition-all duration-300 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0" />
+            </a>
 
             <ModeToggle />
           </div>
