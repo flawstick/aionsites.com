@@ -26,38 +26,52 @@ export function ThemeProvider({
   storageKey = "vite-ui-theme",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
-  );
+  const [theme, setTheme] = useState<Theme>(defaultTheme);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    const root = window.document.documentElement;
-
-    root.classList.remove("light", "dark");
-
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light";
-
-      root.classList.add(systemTheme);
-      return;
+    setIsClient(true);
+    if (typeof window !== "undefined" && window.localStorage) {
+      const savedTheme = localStorage.getItem(storageKey) as Theme;
+      if (savedTheme) {
+        setTheme(savedTheme);
+      }
     }
+  }, [defaultTheme, storageKey]);
 
-    root.classList.add(theme);
-  }, [theme]);
+  useEffect(() => {
+    if (isClient) {
+      const root = window.document.documentElement;
+      root.classList.remove("light", "dark");
 
-  const value = {
+      if (theme === "system") {
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+          .matches
+          ? "dark"
+          : "light";
+        root.classList.add(systemTheme);
+      } else {
+        root.classList.add(theme);
+      }
+    }
+  }, [theme, isClient]);
+
+  const contextValue = {
     theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
+    setTheme: (newTheme: Theme) => {
+      if (typeof window !== "undefined" && window.localStorage) {
+        localStorage.setItem(storageKey, newTheme);
+      }
+      setTheme(newTheme);
     },
   };
 
+  if (!isClient) {
+    return null; // Render nothing on the server side
+  }
+
   return (
-    <ThemeProviderContext.Provider {...props} value={value}>
+    <ThemeProviderContext.Provider value={contextValue} {...props}>
       <div className="overflow-x-hidden">{children}</div>
     </ThemeProviderContext.Provider>
   );
@@ -65,9 +79,8 @@ export function ThemeProvider({
 
 export const useTheme = () => {
   const context = useContext(ThemeProviderContext);
-
-  if (context === undefined)
+  if (!context) {
     throw new Error("useTheme must be used within a ThemeProvider");
-
+  }
   return context;
 };
