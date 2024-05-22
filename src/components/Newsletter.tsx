@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { ArrowUp } from "lucide-react";
 import { LoadingSpinner } from "@/components/Loading"; // Import the loading spinner component
+import { useLocale, useTranslations } from "next-intl";
 
 export const Newsletter = () => {
   const [isSent, setIsSent] = useState(false);
@@ -17,6 +18,10 @@ export const Newsletter = () => {
     company: "",
     message: "",
   });
+
+  const locale = useLocale();
+  const isRTL = locale === "he";
+  const t = useTranslations("Newsletter");
 
   const handleChange = (e: any) => {
     const { id, value } = e.target;
@@ -33,8 +38,12 @@ export const Newsletter = () => {
     try {
       await axios.post("/api/email", {
         to: "info@aionsites.com",
-        subject: "Contact Form Submission",
-        text: `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\nMessage: ${formData.message}`,
+        subject: t("emailSubject"),
+        text: `${t("name")}: ${formData.name}\n${t("email")}: ${
+          formData.email
+        }\n${t("company")}: ${formData.company}\n${t("message")}: ${
+          formData.message
+        }`,
       });
 
       setIsSent(true);
@@ -50,11 +59,8 @@ export const Newsletter = () => {
       <hr className="w-11/12 mx-auto" />
       <div className="mx-auto w-11/12 max-w-md space-y-6 py-20">
         <div className="space-y-2 text-center">
-          <h1 className="text-3xl font-bold">Get in Touch</h1>
-          <p className="text-gray-500 dark:text-gray-400">
-            Fill out the form below and we&apos;ll get back to you as soon as
-            possible.
-          </p>
+          <h1 className="text-3xl font-bold">{t("title")}</h1>
+          <p className="text-gray-500 dark:text-gray-400">{t("description")}</p>
         </div>
         {isSent ? (
           <motion.div
@@ -84,53 +90,55 @@ export const Newsletter = () => {
                 d="M4 12l5 5 11-11"
               />
             </motion.svg>
-            <h2 className="text-2xl font-bold">Thank you!</h2>
-            <p className="text-gray-500">Your message has been sent.</p>
+            <h2 className="text-2xl font-bold">{t("thankYou")}</h2>
+            <p className="text-gray-500">{t("messageSent")}</p>
           </motion.div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name">{t("name")}</Label>
                 <Input
                   id="name"
-                  placeholder="Enter your name"
+                  placeholder={t("namePlaceholder")}
                   required
-                  className="prevent-zoom"
+                  className={`prevent-zoom ${isRTL ? "text-right" : ""}`}
                   value={formData.name}
                   onChange={handleChange}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t("email")}</Label>
                 <Input
                   id="email"
-                  placeholder="Enter your email"
+                  placeholder={t("emailPlaceholder")}
                   required
                   type="email"
-                  className="prevent-zoom"
+                  className={`prevent-zoom ${isRTL ? "text-right" : ""}`}
                   value={formData.email}
                   onChange={handleChange}
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="company">Company</Label>
+              <Label htmlFor="company">{t("company")}</Label>
               <Input
                 id="company"
-                placeholder="Enter your company name"
+                placeholder={t("companyPlaceholder")}
                 required
-                className="prevent-zoom"
+                className={`prevent-zoom ${isRTL ? "text-right" : ""}`}
                 value={formData.company}
                 onChange={handleChange}
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="message">Message</Label>
+              <Label htmlFor="message">{t("message")}</Label>
               <Textarea
-                className="min-h-[100px] prevent-zoom"
+                className={`min-h-[100px] prevent-zoom ${
+                  isRTL ? "text-right" : ""
+                }`}
                 id="message"
-                placeholder="Enter your message"
+                placeholder={t("messagePlaceholder")}
                 required
                 value={formData.message}
                 onChange={handleChange}
@@ -144,12 +152,24 @@ export const Newsletter = () => {
               {isSubmitting ? (
                 <LoadingSpinner />
               ) : (
-                <>
-                  <div className="text-md translate-x-2 group-hover:translate-x-0 transition-all duration-300 transform">
-                    Submit
+                <div
+                  className={`${
+                    isRTL ? "flex flex-row-reverse" : "flex flex-row"
+                  }`}
+                >
+                  <div
+                    className={`text-md ${
+                      isRTL ? "-translate-x-2" : "translate-x-2"
+                    } group-hover:translate-x-0 transition-all duration-300 transform`}
+                  >
+                    {t("submit")}
                   </div>
-                  <ArrowUp className="ml-1 w-4 h-4 mt-[2px] transform transition-all duration-300 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0" />
-                </>
+                  <ArrowUp
+                    className={`ml-1 w-4 h-4 mt-[2px] transform transition-all duration-300 opacity-0 ${
+                      isRTL ? "-translate-x-2" : "translate-x-2"
+                    }  group-hover:opacity-100 group-hover:translate-x-0`}
+                  />
+                </div>
               )}
             </Button>
           </form>

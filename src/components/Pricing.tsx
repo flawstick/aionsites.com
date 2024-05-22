@@ -9,7 +9,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Check } from "lucide-react";
-import { ArrowLongRightIcon } from "./Icons";
+import { ArrowLongRightIcon, ArrowLongLeftIcon } from "./Icons";
+import { useLocale, useTranslations } from "next-intl";
 
 enum PopularPlanType {
   NO = 0,
@@ -27,65 +28,67 @@ interface PricingProps {
 
 const pricingList: PricingProps[] = [
   {
-    title: "Basic",
-    popular: 0,
+    title: "basicTitle",
+    popular: PopularPlanType.NO,
     price: 999,
-    description: "A website and a simple analytics tool.",
-    buttonText: "Get Started",
+    description: "basicDescription",
+    buttonText: "basicButtonText",
     benefitList: [
-      "1 Team member",
-      "A Personalized Website",
-      "Upto 4 pages",
-      "Simple Analytics Dashboard",
+      "basicBenefit1",
+      "basicBenefit2",
+      "basicBenefit3",
+      "basicBenefit4",
     ],
   },
   {
-    title: "Premium",
-    popular: 1,
+    title: "premiumTitle",
+    popular: PopularPlanType.YES,
     price: 5,
-    description:
-      "Everything a business would ever need in terms of modern software.",
-    buttonText: "Reach Out!",
+    description: "premiumDescription",
+    buttonText: "premiumButtonText",
     benefitList: [
-      "4 Team members",
-      "A Personalized Website",
-      "A Personalized Application",
-      "10 Kiosk Tablets",
-      "Advanced Dashboard",
-      "Advanced Analytics",
+      "premiumBenefit1",
+      "premiumBenefit2",
+      "premiumBenefit3",
+      "premiumBenefit4",
+      "premiumBenefit5",
+      "premiumBenefit6",
     ],
   },
   {
-    title: "Enterprise",
-    popular: 0,
+    title: "enterpriseTitle",
+    popular: PopularPlanType.NO,
     price: 40,
-    description: "Manage multiple locations or franchizes with our tools",
-    buttonText: "Contact US",
+    description: "enterpriseDescription",
+    buttonText: "enterpriseButtonText",
     benefitList: [
-      "Unlimited Team Members",
-      "Up to 10 Personalized Websites",
-      "Up to 3 Personalized Applications",
-      "Priority support",
-      "Up to 100 Kiosk Tablets",
-      "Advanced Dashboard",
-      "Advanced Analytics",
+      "enterpriseBenefit1",
+      "enterpriseBenefit2",
+      "enterpriseBenefit3",
+      "enterpriseBenefit4",
+      "enterpriseBenefit5",
+      "enterpriseBenefit6",
+      "enterpriseBenefit7",
     ],
   },
 ];
 
 export const Pricing = () => {
+  const locale = useLocale();
+  const isRTL = locale === "he";
+  const t = useTranslations("Pricing");
+
   return (
     <section id="pricing" className="container py-24 sm:py-32">
-      <h2 className="text-3xl md:text-4xl font-bold text-center">
-        Our
+      <h2 className={`text-3xl md:text-4xl font-bold text-center`}>
+        {t("heading")}
         <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
-          {" "}
-          Personalized{" "}
+          {t("personalized")}
         </span>
-        Plans
+        {t("plans")}
       </h2>
-      <h3 className="text-xl text-center text-muted-foreground pt-4 pb-8">
-        Contact Us and tell us what your business needs!
+      <h3 className={`text-xl text-center text-muted-foreground pt-4 pb-8`}>
+        {t("subheading")}
       </h3>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {pricingList.map((pricing: PricingProps) => (
@@ -98,15 +101,21 @@ export const Pricing = () => {
             }
           >
             <CardHeader>
-              <CardTitle className="flex item-center justify-between">
-                {pricing.title}
+              <CardTitle
+                className={`flex item-center justify-between ${
+                  isRTL ? "text-right flex-row-reverse" : ""
+                }`}
+              >
+                {t(pricing.title)}
                 {pricing.popular === PopularPlanType.YES ? (
                   <Badge variant="secondary" className="text-sm text-primary">
-                    Most popular
+                    {t("mostPopular")}
                   </Badge>
                 ) : null}
               </CardTitle>
-              <CardDescription>{pricing.description}</CardDescription>
+              <CardDescription className={isRTL ? "text-right" : ""}>
+                {t(pricing.description)}
+              </CardDescription>
             </CardHeader>
 
             <CardContent>
@@ -119,21 +128,35 @@ export const Pricing = () => {
                   },
                 )}`}
               >
-                <div className="text-md translate-x-4 group-hover:translate-x-0 transition-all duration-300 transform">
-                  {pricing.buttonText}
+                {isRTL && (
+                  <ArrowLongLeftIcon className="mr-2 w-6 h-6 mt-[2px] transform transition-all duration-300 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0" />
+                )}
+                <div
+                  className={`text-md ${
+                    isRTL ? "-translate-x-4 " : "translate-x-4"
+                  } group-hover:translate-x-0 transition-all duration-300 transform`}
+                >
+                  {t(pricing.buttonText)}
                 </div>
-                <ArrowLongRightIcon className="ml-2 w-6 h-6 mt-[2px] transform transition-all duration-300 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0" />
+                {!isRTL && (
+                  <ArrowLongRightIcon className="ml-2 w-6 h-6 mt-[2px] transform transition-all duration-300 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0" />
+                )}
               </a>
             </CardContent>
 
             <hr className="w-4/5 m-auto mb-4" />
 
-            <CardFooter className="flex">
-              <div className="space-y-4">
+            <CardFooter className={`flex ${isRTL ? "flex-row-reverse" : null}`}>
+              <div className={`space-y-4 ${isRTL ? "text-right" : ""}`}>
                 {pricing.benefitList.map((benefit: string) => (
-                  <span key={benefit} className="flex">
+                  <span
+                    key={benefit}
+                    className={`flex ${isRTL ? "flex-row-reverse" : ""}`}
+                  >
                     <Check className="text-green-500" />{" "}
-                    <h3 className="ml-2">{benefit}</h3>
+                    <h3 className={`ml-2 ${isRTL ? "mr-2" : ""}`}>
+                      {t(benefit)}
+                    </h3>
                   </span>
                 ))}
               </div>

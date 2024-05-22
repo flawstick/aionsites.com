@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useLocale, useTranslations } from "next-intl";
 
 interface FAQProps {
   question: string;
@@ -13,67 +14,73 @@ interface FAQProps {
 
 const FAQList: FAQProps[] = [
   {
-    question: "What do you do?",
-    answer:
-      "We help business grow by creating personalized software aligned with their plans and ambitions.",
+    question: "question1",
+    answer: "answer1",
     value: "item-1",
   },
   {
-    question: "What are your services?",
-    answer:
-      "We create all kinds of personalized software, from websites all the way to self-serving AI robots.",
+    question: "question2",
+    answer: "answer2",
     value: "item-2",
   },
   {
-    question: "How much do your services cost?",
-    answer:
-      "We create personalized software, which means the costs are personalized along with them to fit your budget needs.",
+    question: "question3",
+    answer: "answer3",
     value: "item-3",
   },
   {
-    question: "Do you have a support center?",
-    answer:
-      "We provide 24/7 support for all our clients. You will be provided a number to call once we establish partnership.",
+    question: "question4",
+    answer: "answer4",
     value: "item-4",
   },
   {
-    question: "I would like to see a personalized demo, is that possible?",
-    answer:
-      "Yes, you can request a personalized demo. Simply contact us at info@aionsites.com, or fill out the contact form on this page.",
+    question: "question5",
+    answer: "answer5",
     value: "item-5",
   },
 ];
 
 export const FAQ = () => {
+  const locale = useLocale();
+  const isRTL = locale === "he";
+  const t = useTranslations("FAQ");
+
   return (
     <section id="faq" className="container py-24 sm:py-32">
-      <h2 className="text-3xl md:text-4xl font-bold mb-4">
-        Frequently Asked{" "}
+      <h2
+        className={`text-3xl md:text-4xl font-bold mb-4 ${
+          isRTL ? "text-right" : ""
+        }`}
+      >
+        {t("heading")}{" "}
         <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
-          Questions
+          {t("questions")}
         </span>
       </h2>
 
       <Accordion type="single" collapsible className="w-full AccordionRoot">
         {FAQList.map(({ question, answer, value }: FAQProps) => (
           <AccordionItem key={value} value={value}>
-            <AccordionTrigger className="text-left">
-              {question}
+            <AccordionTrigger
+              className={`text-left ${isRTL ? "text-right rtl" : ""}`}
+            >
+              {t(question)}
             </AccordionTrigger>
-
-            <AccordionContent>{answer}</AccordionContent>
+            <AccordionContent className={isRTL ? "text-right" : ""}>
+              {t(answer)}
+            </AccordionContent>
           </AccordionItem>
         ))}
       </Accordion>
 
-      <h3 className="font-medium mt-4">
-        Still have questions?{" "}
+      <h3 className={`font-medium mt-4 ${isRTL ? "text-right rtl" : ""}`}>
+        {t("stillHaveQuestions")}{" "}
         <a
           rel="noreferrer noopener"
           href="#contact"
           className="text-primary transition-all border-primary hover:border-b-2"
         >
-          Contact us
+          {t("contactUs")}
         </a>
       </h3>
     </section>

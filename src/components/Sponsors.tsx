@@ -9,29 +9,34 @@ import {
 import tabletMockup from "/public/tablet-mockup.jpg";
 import androidMockup from "/public/android-mockup.png";
 import artfulDesktopMockup from "/public/artful-desktop-mockup.png";
+import { useLocale, useTranslations } from "next-intl";
 
 const images = [
   {
     src: tabletMockup,
-    alt: "Stunning Design",
-    title: "Stunning Design",
-    description: "Custom Tablets for Your Needs",
+    altKey: "tabletAlt",
+    titleKey: "tabletTitle",
+    descriptionKey: "tabletDescription",
   },
   {
     src: androidMockup,
-    alt: "Responsive Applications",
-    title: "Responsive Applications",
-    description: "Develop and Tailor Mobile Applications",
+    altKey: "androidAlt",
+    titleKey: "androidTitle",
+    descriptionKey: "androidDescription",
   },
   {
     src: artfulDesktopMockup,
-    alt: "Analytics",
-    title: "Analytics & Dashboard",
-    description:
-      "Manage and Administrate Your Business, Make Informed Decisions",
+    altKey: "desktopAlt",
+    titleKey: "desktopTitle",
+    descriptionKey: "desktopDescription",
   },
 ];
+
 export function Gallery() {
+  const locale = useLocale();
+  const isRTL = locale === "he";
+  const t = useTranslations("Gallery");
+
   return (
     <section
       id="carousel"
@@ -39,10 +44,10 @@ export function Gallery() {
     >
       <div className="text-center px-4 sm:px-0">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-          The Essence of Our Brand
+          {t("title")}
         </h2>
         <p className="mt-3 text-gray-500 max-w-md mx-auto sm:mt-5 sm:text-lg md:mt-6">
-          We create breathtaking software easily integrable into YOUR workflow.
+          {t("description")}
         </p>
       </div>
       <Carousel className="w-full max-w-[1200px] mt-8 text-black dark:text-white">
@@ -51,7 +56,7 @@ export function Gallery() {
             <CarouselItem key={index}>
               <div className="relative group">
                 <Image
-                  alt={image.alt}
+                  alt={t(image.altKey)}
                   className="object-cover w-full rounded-lg"
                   height={600}
                   src={image.src}
@@ -62,12 +67,16 @@ export function Gallery() {
                   width={1200}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent rounded-lg group-hover:from-gray-900/70 transition-colors duration-300" />
-                <div className="absolute bottom-4 left-4 text-white text-lg font-medium group-hover:bottom-8 transition-all duration-300">
-                  {image.title}
+                <div
+                  className={`absolute bottom-4 ${
+                    isRTL ? "right-4" : "left-4"
+                  } text-white text-lg font-medium group-hover:bottom-8 transition-all duration-300`}
+                >
+                  {t(image.titleKey)}
                 </div>
                 <div className="absolute inset-0 bg-gray-900/0 group-hover:bg-gray-900/50 rounded-lg transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                   <p className="text-white text-2xl font-bold">
-                    {image.description}
+                    {t(image.descriptionKey)}
                   </p>
                 </div>
               </div>

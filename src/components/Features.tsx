@@ -6,8 +6,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import image from "/public/growth.png";
-import image3 from "/public/reflecting.png";
 
 import desktopMockupLight from "/public/desktop-mockup-light.png";
 import desktopMockup from "/public/desktop-mockup.png";
@@ -15,6 +13,7 @@ import iphoneMockup from "/public/iphone-mockup.png";
 import tabletFrontMockup from "/public/tablet-front-mockup.png";
 import Image, { StaticImageData } from "next/image";
 import { useTheme } from "./theme-provider";
+import { useLocale, useTranslations } from "next-intl";
 
 interface FeatureProps {
   title: string;
@@ -22,67 +21,79 @@ interface FeatureProps {
   image: StaticImageData | string;
 }
 
-const features: FeatureProps[] = [
-  {
-    title: "Dashboard",
-    description:
-      "Our seamless dashboard integrates all services, providing a unified platform for efficient management and operations.",
-    image: desktopMockup,
-  },
-  {
-    title: "Mobile Applications",
-    description:
-      "Tailored mobile applications that enhance accessibility and productivity, seamlessly integrating into your business environment.",
-    image: iphoneMockup, // Assuming image2 represents mobile applications
-  },
-  {
-    title: "Tablets",
-    description:
-      "Preloaded tablets with custom software, ensuring seamless integration and enhanced functionality for your operations.",
-    image: tabletFrontMockup, // Assuming image5 represents tablets
-  },
+const featureList: string[] = [
+  "dashboard",
+  "mobileSoftware",
+  "preloadedTablets",
+  "customDashboards",
+  "design",
+  "efficiency",
+  "integration",
+  "userExperience",
+  "scalability",
 ];
 
-const featureList: string[] = [
-  "Dashboard",
-  "Mobile Software",
-  "Preloaded Tablets",
-  "Custom Dashboards",
-  "Design",
-  "Efficiency",
-  "Integration",
-  "User Experience",
-  "Scalability",
-];
+const renderFeatureList = (t: (key: string) => string, isRTL: boolean) => (
+  <div
+    className={`flex flex-wrap md:justify-center gap-4 ${
+      isRTL ? "flex-row-reverse" : ""
+    }`}
+  >
+    {featureList.map((feature: string, index: number) => (
+      <div key={index}>
+        <Badge variant="secondary" className="text-sm">
+          {t(feature)}
+        </Badge>
+      </div>
+    ))}
+  </div>
+);
 
 export const Features = () => {
   const { theme } = useTheme();
+  const locale = useLocale();
+  const isRTL = locale === "he";
+  const t = useTranslations("Features");
 
   const isDarkMode =
     theme === "dark" ||
     (theme === "system" &&
+      typeof window !== "undefined" &&
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-  if (!isDarkMode) features[0].image = desktopMockupLight;
+  const features: FeatureProps[] = [
+    {
+      title: t("dashboardTitle"),
+      description: t("dashboardDescription"),
+      image: isDarkMode ? desktopMockup : desktopMockupLight,
+    },
+    {
+      title: t("mobileTitle"),
+      description: t("mobileDescription"),
+      image: iphoneMockup,
+    },
+    {
+      title: t("tabletsTitle"),
+      description: t("tabletsDescription"),
+      image: tabletFrontMockup,
+    },
+  ];
 
   return (
-    <section id="features" className="container py-24 sm:py-32 space-y-8">
+    <section
+      id="features"
+      className={`container py-24 sm:py-32 space-y-8 ${
+        isRTL ? "text-right" : ""
+      }`}
+    >
       <h2 className="text-3xl lg:text-4xl font-bold md:text-center">
-        Many{" "}
+        {t("heading")}{" "}
         <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
-          Great Features
+          {t("greatFeatures")}
         </span>
       </h2>
 
-      <div className="flex flex-wrap md:justify-center gap-4">
-        {featureList.map((feature: string) => (
-          <div key={feature}>
-            <Badge variant="secondary" className="text-sm">
-              {feature}
-            </Badge>
-          </div>
-        ))}
-      </div>
+      {renderFeatureList(t, isRTL)}
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {features.map(({ title, description, image }: FeatureProps) => (
@@ -96,8 +107,8 @@ export const Features = () => {
             <CardFooter>
               <Image
                 src={image}
-                alt="About feature"
-                className="w-[200px] lg:max-w-[300px]  pt-5 mx-auto"
+                alt={t("aboutFeature")}
+                className="w-[200px] lg:max-w-[300px] pt-5 mx-auto"
               />
             </CardFooter>
           </Card>

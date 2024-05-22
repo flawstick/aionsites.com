@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const ScrollDownArrow = () => {
+  const t = useTranslations("Hero");
+
   return (
     <a
       rel="noreferrer noopener"
@@ -19,7 +22,7 @@ const ScrollDownArrow = () => {
         className="flex flex-col items-center"
       >
         <ArrowDown className="w-8 h-8 text-gray-500" />
-        <p className="text-gray-500 mt-2">Scroll down</p>
+        <p className="text-gray-500 mt-2">{t("scrollDown")}</p>
       </motion.div>
     </a>
   );

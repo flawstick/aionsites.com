@@ -1,30 +1,39 @@
 import { LogoIcon } from "./Icons";
+import { useLocale, useTranslations } from "next-intl";
+
+import { cn } from "@/lib/utils";
 
 export const Footer = () => {
+  const locale = useLocale();
+  const isRTL = locale === "he";
+  const t = useTranslations("Footer");
+
   return (
     <footer id="footer">
       <hr className="w-11/12 mx-auto" />
 
       <section className="self-center container py-20 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-x-12 gap-y-8">
-        <div className="col-span-full xl:col-span-2">
+        <div className={`col-span-full xl:col-span-2 `}>
           <a
             rel="noreferrer noopener"
             href="/"
-            className="font-bold text-xl flex"
+            className="font-bold text-xl flex justify-center md:justify-start"
           >
-            <LogoIcon size={400} />
+            <LogoIcon size={200} />
           </a>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <h3 className="font-bold text-lg">Follow US</h3>
+        <div
+          className={cn("flex flex-col gap-2 ", isRTL ? "text-right" : null)}
+        >
+          <h3 className="font-bold text-lg">{t("followUs")}</h3>
           <div>
             <a
               rel="noreferrer noopener"
               href="#"
               className="opacity-60 hover:opacity-100"
             >
-              Instagram
+              {t("instagram")}
             </a>
           </div>
 
@@ -34,7 +43,7 @@ export const Footer = () => {
               href="#"
               className="opacity-60 hover:opacity-100"
             >
-              Facebook
+              {t("facebook")}
             </a>
           </div>
 
@@ -44,53 +53,20 @@ export const Footer = () => {
               href="#"
               className="opacity-60 hover:opacity-100"
             >
-              Twitter (X)
-            </a>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <h3 className="font-bold text-lg">Platforms</h3>
-          <div>
-            <a
-              rel="noreferrer noopener"
-              href="#"
-              className="opacity-60 hover:opacity-100"
-            >
-              Web
-            </a>
-          </div>
-
-          <div>
-            <a
-              rel="noreferrer noopener"
-              href="#"
-              className="opacity-60 hover:opacity-100"
-            >
-              Mobile
-            </a>
-          </div>
-
-          <div>
-            <a
-              rel="noreferrer noopener"
-              href="#"
-              className="opacity-60 hover:opacity-100"
-            >
-              Desktop
+              {t("twitter")}
             </a>
           </div>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <h3 className="font-bold text-lg">About</h3>
+        <div className={cn("flex flex-col gap-2", isRTL ? "text-right" : null)}>
+          <h3 className="font-bold text-lg">{t("platforms")}</h3>
           <div>
             <a
               rel="noreferrer noopener"
               href="#"
               className="opacity-60 hover:opacity-100"
             >
-              Features
+              {t("web")}
             </a>
           </div>
 
@@ -100,7 +76,7 @@ export const Footer = () => {
               href="#"
               className="opacity-60 hover:opacity-100"
             >
-              Pricing
+              {t("mobile")}
             </a>
           </div>
 
@@ -110,20 +86,53 @@ export const Footer = () => {
               href="#"
               className="opacity-60 hover:opacity-100"
             >
-              FAQ
+              {t("desktop")}
             </a>
           </div>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <h3 className="font-bold text-lg">Contact US</h3>
+        <div className={cn("flex flex-col gap-2", isRTL ? "text-right" : null)}>
+          <h3 className="font-bold text-lg">{t("about")}</h3>
           <div>
             <a
               rel="noreferrer noopener"
               href="#"
               className="opacity-60 hover:opacity-100"
             >
-              Form
+              {t("features")}
+            </a>
+          </div>
+
+          <div>
+            <a
+              rel="noreferrer noopener"
+              href="#"
+              className="opacity-60 hover:opacity-100"
+            >
+              {t("pricing")}
+            </a>
+          </div>
+
+          <div>
+            <a
+              rel="noreferrer noopener"
+              href="#"
+              className="opacity-60 hover:opacity-100"
+            >
+              {t("faq")}
+            </a>
+          </div>
+        </div>
+
+        <div className={cn("flex flex-col gap-2", isRTL ? "text-right" : null)}>
+          <h3 className="font-bold text-lg">{t("contactUs")}</h3>
+          <div>
+            <a
+              rel="noreferrer noopener"
+              href="#"
+              className="opacity-60 hover:opacity-100"
+            >
+              {t("form")}
             </a>
           </div>
 
@@ -133,7 +142,7 @@ export const Footer = () => {
               href="mailto:info@aionsites.com"
               className="opacity-60 hover:opacity-100"
             >
-              Email
+              {t("email")}
             </a>
           </div>
         </div>
@@ -141,7 +150,7 @@ export const Footer = () => {
 
       <section className="container pb-14 text-center">
         <h3>
-          &copy; 2024 All Rights Reserved to{" "}
+          &copy; 2024 All Rights Reserved To{" "}
           <a
             rel="noreferrer noopener"
             target="_blank"
