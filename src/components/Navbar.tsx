@@ -18,6 +18,7 @@ import { ModeToggle } from "./mode-toggle";
 import { ArrowLongRightIcon, ArrowLongLeftIcon, LogoIcon } from "./Icons";
 import { useLocale, useTranslations } from "next-intl";
 import LangToggle from "./lang-toggle";
+import { AionsitesNavigation } from "@/components/aionsites-navigation";
 
 interface RouteProps {
   href: string;
@@ -130,53 +131,13 @@ export const Navbar = () => {
           </span>
 
           {/* desktop */}
-          <nav
-            className={`hidden md:flex gap-2 ${
-              isRTL ? "flex-row-reverse" : ""
-            }`}
-          >
-            {routeList.map((route: RouteProps, i) => (
-              <a
-                rel="noreferrer noopener"
-                href={route.href}
-                key={i}
-                className={`text-[17px] ${buttonVariants({
-                  variant: "ghost",
-                })}`}
-              >
-                {route.label}
-              </a>
-            ))}
-          </nav>
+          <AionsitesNavigation />
 
           <div
             className={`hidden md:flex gap-2 ${
               isRTL ? "flex-row-reverse" : ""
             }`}
           >
-            <a
-              rel="noreferrer noopener"
-              href="https://app.aionsites.com/"
-              target="_blank"
-              className={`group ${buttonVariants({
-                variant: "default",
-              })}`}
-            >
-              {isRTL && (
-                <ArrowLongLeftIcon className="mr-2 w-6 h-6 mt-[2px] transform transition-all duration-300 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0" />
-              )}
-              <div
-                className={`text-md ${
-                  isRTL ? "-translate-x-4 " : "translate-x-4"
-                } group-hover:translate-x-0 transition-all duration-300 transform`}
-              >
-                {t("launchApp")}
-              </div>
-              {!isRTL && (
-                <ArrowLongRightIcon className="ml-2 w-6 h-6 mt-[2px] transform transition-all duration-300 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0" />
-              )}
-            </a>
-
             <ModeToggle />
             <LangToggle />
           </div>

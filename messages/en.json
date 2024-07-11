@@ -165,5 +165,107 @@
   },
   "LangToggle": {
     "toggleLang": "Toggle language"
+  },
+  "PrivacyPolicy": {
+    "title": "Privacy Policy",
+    "intro": "At AionSites, we are committed to protecting the privacy and security of your personal information. This privacy policy explains in detail how we collect, use, and safeguard your data to ensure transparency and trust in our practices. We value your privacy and are dedicated to maintaining the confidentiality and integrity of the personal information you entrust to us.",
+    "dataCollection": {
+      "title": "Data Collection",
+      "description": "We collect personal information that you provide to us, such as your name, email address, and any other information you choose to share with us. This can occur when you sign up for our services, subscribe to our newsletters, or engage in other activities on our website. We may also collect information about your use of our website and services, including your IP address, browser type, device information, and browsing behavior. Additionally, we may gather data from third-party sources, such as social media platforms, to better understand your preferences and improve our services. This comprehensive data collection helps us tailor our offerings to meet your needs more effectively."
+    },
+    "dataUsage": {
+      "title": "Data Usage",
+      "description": "We use the information we collect to provide and improve our services, communicate with you, and comply with legal and regulatory requirements. This includes using your data to process transactions, provide customer support, and personalize your experience on our website. We may also use your information to send you updates, marketing communications, and promotional offers that we believe may be of interest to you. Our goal is to enhance your experience with AionSites by providing relevant content and recommendations. You can opt-out of receiving marketing communications from us at any time by following the unsubscribe instructions included in these emails or by contacting our support team. We are committed to using your data responsibly and ensuring it is handled with the utmost care."
+    },
+    "dataSharing": {
+      "title": "Data Sharing",
+      "description": "We may share your personal information with third-party service providers who assist us in operating our website and delivering our services. These providers are contractually obligated to protect your data and are only permitted to use it for the purposes of providing services to us. We may also share your information with law enforcement or other government agencies as required by law or in response to legal requests. Additionally, we may disclose your information to protect our rights, privacy, safety, or property, and that of our users and the public. In the event of a business transfer, such as a merger or acquisition, we may transfer your personal information to the relevant third party. We ensure that any such transfers are conducted in a manner that protects your privacy rights."
+    },
+    "dataSecurity": {
+      "title": "Data Security",
+      "description": "We take reasonable measures to protect your personal information from unauthorized access, use, or disclosure. This includes the use of encryption, secure servers, firewalls, and other industry-standard security practices. We regularly review our security procedures to ensure the ongoing protection of your data. While we strive to protect your personal information, please be aware that no security measures are perfect or impenetrable. We encourage you to take steps to protect your own information, such as using strong passwords and avoiding sharing sensitive information through unsecured channels. Our commitment to data security is unwavering, and we continuously work to enhance our measures to safeguard your information."
+    },
+    "yourRights": {
+      "title": "Your Rights",
+      "description": "You have the right to access, correct, or delete your personal information. You can also request that we limit the processing of your data or object to certain uses of your information. If you would like to exercise any of these rights, please contact our privacy team using the contact information provided on our website. We are committed to responding to your requests in a timely manner and ensuring your privacy rights are respected. Additionally, you have the right to lodge a complaint with a supervisory authority if you believe that we have not complied with applicable data protection laws. Your privacy and trust are of paramount importance to us, and we are here to address any questions or concerns you may have about our privacy practices. Please do not hesitate to reach out to us if you need further assistance."
+    }
+  },
+  "TermsOfService": {
+    "title": "Terms of Service",
+    "intro": "These terms of service outline the rules and regulations for the use of AionSites' website and services. By accessing this website, we assume you accept these terms in full. Do not continue to use AionSites if you do not accept all of the terms stated on this page.",
+    "agreement": {
+      "title": "Agreement",
+      "description": "By using our services, you agree to be bound by these terms. This agreement is a legal contract between you and AionSites. It sets out your rights and responsibilities when using our services. Please read it carefully. If you do not agree to these terms, you may not use our services."
+    },
+    "services": {
+      "title": "Services",
+      "description": "AionSites provides various online services, including web and mobile application development, digital marketing, and other related services. Our services are provided 'as is' and we reserve the right to modify or discontinue any aspect of our services at any time without prior notice."
+    },
+    "userResponsibilities": {
+      "title": "User Responsibilities",
+      "description": "As a user of our services, you agree to use our services in compliance with all applicable laws and regulations. You must not use our services for any unlawful or prohibited activities. You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account."
+    },
+    "limitations": {
+      "title": "Limitations of Liability",
+      "description": "AionSites will not be liable for any damages that may occur as a result of using our services. This includes, but is not limited to, direct, indirect, incidental, punitive, and consequential damages. Our liability is limited to the maximum extent permitted by law."
+    },
+    "governingLaw": {
+      "title": "Governing Law",
+      "description": "These terms shall be governed and construed in accordance with the laws of the jurisdiction in which AionSites operates, without regard to its conflict of law provisions. Any disputes arising out of or in connection with these terms shall be resolved in the courts of that jurisdiction."
+    }
+  },
+  "NavigationMenu": {
+    "gettingStarted": "Getting started",
+    "webApps": "Web Apps",
+    "information": "Information",
+    "grub": "Grub",
+    "trustedPartner": "Your trusted partner for customized digital solutions. Accessible. Customizable. Reliable.",
+    "aboutUs": {
+      "title": "About Us",
+      "description": "Learn more about AionSites and our mission to provide tailored digital solutions."
+    },
+    "ourServices": {
+      "title": "Our Services",
+      "description": "Discover the wide range of services we offer, from app development to digital marketing."
+    },
+    "grubDescription": "Seamless delivery solutions for your business needs. Efficient. Integrated. User-friendly.",
+    "sections": {
+      "restaurantsAdmin": {
+        "title": "Restaurants Admin",
+        "description": "Access the admin panel for managing restaurant operations, menus, and orders."
+      },
+      "companyAdmins": {
+        "title": "Company Admins",
+        "description": "Manage company settings, employee access, and overall administration."
+      },
+      "installationGuide": {
+        "title": "Installation Guide",
+        "description": "How to install dependencies and set up your app environment."
+      },
+      "termsOfService": {
+        "title": "Terms of Service",
+        "description": "Read our terms of service to understand the rules and regulations for using AionSites."
+      },
+      "privacyPolicy": {
+        "title": "Privacy Policy",
+        "description": "Learn how we collect, use, and protect your personal information."
+      },
+      "contactUs": {
+        "title": "Contact Us",
+        "description": "Get in touch with us for any inquiries or support."
+      },
+      "androidInstallations": {
+        "title": "Android Installations",
+        "description": "How to install Grub on Android devices."
+      },
+      "appleInstallations": {
+        "title": "Apple Installations",
+        "description": "How to install Grub on Apple devices."
+      },
+      "integrationInfo": {
+        "title": "Integration Information",
+        "description": "Details on how to integrate Grub with your systems."
+      }
+    }
   }
 }

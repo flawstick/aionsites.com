@@ -1,12 +1,17 @@
+import { HTMLAttributes } from "react";
+
 interface LogoIconsProps {
   size?: number;
 }
 
-interface DefaultIconProps {
-  className?: string;
+interface DefaultIconProps extends HTMLAttributes<SVGElement> {
+  size?: number;
 }
 
-export const LogoIcon: React.FC<LogoIconsProps> = ({ size = 140 }) => {
+export const LogoIcon: React.FC<DefaultIconProps> = ({
+  size = 140,
+  ...props
+}) => {
   return (
     <svg
       version="1.0"
@@ -15,6 +20,7 @@ export const LogoIcon: React.FC<LogoIconsProps> = ({ size = 140 }) => {
       height={size}
       viewBox="0 0 1024.000000 1024.000000"
       preserveAspectRatio="xMidYMid meet"
+      className={props?.className}
     >
       <g
         transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)"
